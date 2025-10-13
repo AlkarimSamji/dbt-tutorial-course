@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: stg_ecommerce__orders
+    description: "Table of 1 row per order"
+    columns:
+      - name: order_id
+        description: ""
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        description: ""
+        tests:
+          - not_null
+
+      - name: status
+        description: ""
+        tests:
+          - not_null
+          - accepted_values:
+              name: unexpected_order_status #we can name our tests to make it easier to give more meaningful errors
+              values:
+                - "Processing" #quotes not required as dbt handles strings automatically. 
+                #if you want to use literals you add quote: false then you can write statements like TRUE or FALSE and they won't have quotes around them
+                - Cancelled
+                - Shipped
+                - Complete
+                - Returned
+
+      - name: created_at
+        description: "when the order was created"
+        tests:
+          - not_null
+
+      - name: returned_at
+        description: "when the order was returned"
+        tests:
+          - not_null:
+              where: "status = 'Returned'"
+
+      - name: shipped_at
+        description: ""
+        tests:
+          - not_null:
+              where: "delivered_at IS NOT NULL or status='Shipped'"
+
+      - name: delivered_at
+        description: ""
+        tests:
+          - not_null:
+              where: "returned_at IS NOT NULL or status = 'Complete'"
+
+      - name: num_items_ordered
+        description: ""
+        tests:
+          - not_null

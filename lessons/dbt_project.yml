@@ -29,3 +29,17 @@ clean-targets:         # directories to be removed by `dbt clean`
 # In this example config, we tell dbt to build all models in the example/
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
+models:
+  lessons:
+    +materialized: table #plus is optional can be used to denote configuration. you can set this up and override in files using this format: # {{ config { materialized = 'view' }}}    
+    +persist_docs: # Writes all of our column descriptions into BigQuery!
+      relation: true
+      columns: true
+    # Table deletes 168 hours (7 days) after creation
+    +hours_to_expiration: 168
+  
+tests:
+  lessons:
+    +severity: warn
+    #marts:
+    #  +severity: error
