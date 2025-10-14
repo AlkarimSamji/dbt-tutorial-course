@@ -14,7 +14,7 @@ models:
       - name: order_item_id
         tests:
           - not_null:
-              severity: error #can be warn too
+              severity: error
           - unique:
               severity: error
 
@@ -65,5 +65,4 @@ models:
         tests:
           - not_null
           - dbt_utils.expression_is_true:
-              expression: "= (product_retail_price - item_sale_price) -1"
-              severity: warn
+              expression: "= (product_retail_price - item_sale_price)"

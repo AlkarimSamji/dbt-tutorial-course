@@ -7,6 +7,7 @@
     We could run multiple checks here (e.g. check only 1 user_id per order, or that the shipped_at timestamps
 	are all the same for a given order), but this is just an example of a custom test.
 */
+/* EXAMPLE OF A SINGULAR TEST */
 {{ config(severity = 'error')}} /*or use config(error_if)*/
 --will run when either table is tested unless you hard code the table name in the from clause. refer to video. https://www.udemy.com/course/mastering-dbt-data-build-tool-bootcamp/learn/lecture/37303484#overview
 WITH order_details AS (
