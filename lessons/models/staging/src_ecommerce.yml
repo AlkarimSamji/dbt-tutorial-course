@@ -15,6 +15,9 @@ sources:
           error_after: {count: 24, period: hour}
         loaded_at_field: created_at
         filter: "created_at >= '2025-10-01" #filter only applies to freshness check
+        config:
+          event_time: created_at
+      - name: distribution_centers
 
 unit_tests:
   - name: test_profit_and_discounts

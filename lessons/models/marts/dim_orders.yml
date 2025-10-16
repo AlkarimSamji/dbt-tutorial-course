@@ -4,9 +4,13 @@ groups:
   - name: sales
     owner:
       # 'name' or 'email' is required; additional properties allowed
+      # this could be in a groups.yml file too
       email: sales@my-company.com
       slack: sales-data
       github: sales-data-team
+  - name: marketing
+    owner:
+      email: marketing@my-company.com
 
 models:
   - name: dim_orders
@@ -14,7 +18,7 @@ models:
     # Set this model to be a part of the sales group we define above
     # We don't need to define the group and the model in the same yml file!
     config:
-      group: sales
+      group: sales #plus here won't work
     # 3 settings:
     # Private - only other models in the same (sales) group can ref() this model
     # Protected - only other models in the same group or project can ref() this model
@@ -49,6 +53,7 @@ models:
         description: "When the order was shipped"
 
       - name: order_status
+        description: "{{ doc('status')}}"
 
       - name: num_items_ordered
         description: "Number of items in the order"

@@ -68,6 +68,7 @@ models:
           # This means: use the 'columns' list from above, but exclude "brand" as we added it in v2
           - include: all
             exclude: [brand]
+        #if you don't specify alias it will be suffixed with _v1 and _v2
 
         # We added a new brand column
         - v: 2
