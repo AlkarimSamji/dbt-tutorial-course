@@ -43,6 +43,9 @@ models:
       - name: order_created_at
         description: "When the order was created"
 
+      - name: order_was_created_on_weekend
+        description: "Was the order created on the weekend"
+        
       - name: order_returned_at
         description: "When the order was returned"
 
